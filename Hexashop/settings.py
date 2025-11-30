@@ -95,6 +95,8 @@ AUTH_USER_MODEL = "myapp.CustomUser"
 #         }
 #     }
 # }
+from dotenv import load_dotenv
+load_dotenv()
 
 DATABASES = {
     'default': dj_database_url.config(
