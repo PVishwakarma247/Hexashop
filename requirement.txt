@@ -1,3 +1,0 @@
-# HexaShop project Python dependencies
-
-Django
