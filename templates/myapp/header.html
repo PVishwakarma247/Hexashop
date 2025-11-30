@@ -1,0 +1,101 @@
+ <!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+
+    <title>Hexashop</title>
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" type="text/css" href="/static/myapp/css/bootstrap.min.css">
+    
+    <link rel="stylesheet" type="text/css" href="/static/myapp/css/font-awesome.css">
+    
+    <link rel="stylesheet" href="/static/myapp/css/templatemo-hexashop.css">
+    
+    <link rel="stylesheet" href="/static/myapp/css/owl-carousel.css">
+    
+    <link rel="stylesheet" href="/static/myapp/css/lightbox.css">
+    
+    <link rel="stylesheet" href="/static/myapp/css/message.css">
+
+    <link rel="stylesheet" href="/static/myapp/css/cart.css">
+
+    <link rel="stylesheet" 
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@40,400,0,0&icon_names=account_circle,shopping_cart" />
+<!--
+
+TemplateMo 571 Hexashop
+
+https://templatemo.com/tm-571-hexashop
+
+-->
+    </head>
+ <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="{% url 'home' %}" class="logo", style="top:50%; position: sticky;">
+                            <img src="/static/myapp/images/logo.png">
+                        </a>
+                        <!-- ***** Logo End ***** -->
+                                 {% if messages %}
+                                    <ul class="messages">
+                                        {% for message in messages %}
+                                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                                                {{ message }}
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+    
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li class="scroll-to-section"><a href="{% url 'home' %}" class="active">Home</a></li>
+                            <li><a href="{% url 'product' %}">Explore</a></li>
+                            <li class="submenu">
+                                <a href="javascript:;">Categories</a>
+                                <ul>
+                                    <li class="scroll-to-section"><a href="{% url 'home' %}#men">Men's</a></li>
+                                    <li class="scroll-to-section"><a href="{% url 'home' %}#women">Women's</a></li>
+                                    <li class="scroll-to-section"><a href="{% url 'home' %}#kids">Kid's</a></li>
+                                </ul>
+                            </li>
+                            
+                            <li><a href="{% url 'cart' %}"><span class="material-symbols-outlined" style="padding-top: 6px;">
+                            shopping_cart
+                            </span></a></li>
+                            
+                            <li class="submenu">
+                                <span class="material-symbols-outlined" style="padding-top: 6px;">
+                                account_circle
+                                </span>
+                                <ul>
+                                    <li><a href="{% url 'about' %}">About Us</a></li>
+                                    <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                                    {% if request.user.is_authenticated %}
+                                    <li class="scroll-to-section"><a href="{% url 'logout_view' %}">Logout</a></li>
+                                    {% else %}
+                                    <li class="scroll-to-section"><a href="{% url 'signup' %}">Sign Up</a></li>
+                                    <li class="scroll-to-section"><a href="{% url 'login_view' %}">Login</a></li>
+                                    {% endif %}
+                                    
+                                </ul>
+                            </li>
+                        </ul>        
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>

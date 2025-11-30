@@ -1,0 +1,71 @@
+{% load static %}
+<body>
+
+    {% include 'myapp/header.html' %}
+
+    <div class="cart-container">
+        <h2 class="cart-title">Your Cart</h2>
+        <table class="cart-table">
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+            {% if cart_items and cart_items|length > 0 %}
+                {% for item in cart_items %}
+                <tr>
+                    <td>
+                        <div style="display:flex; align-items:center;">
+                            {% if item.product.image_path %}
+                                <img class="cart-item-img" src="{{ item.product.image_url }}" alt="{{ item.product.name }}" style="width:80px; height:auto; margin-right:10px;" />
+                            {% endif %}
+                            <div class="cart-item-info" style="display:flex; flex-direction:column; justify-content:center;"></div>
+                                <span class="cart-item-name">{{ item.product.name }}</span>
+                        </div>
+                    </td>
+                    <td>${{ item.product.price }}</td>
+                    <td>
+                        <div class="cart-qty-box">
+                            <form method="post" action="{% url 'update_cart_item' item.id %}" style="display:inline-block;">
+                                {% csrf_token %}
+                                <input type="hidden" name="op" value="dec">
+                                <button type="submit" class="qty-btn">-</button>
+                            </form>
+
+                            <span style="margin:0 8px">{{ item.quantity }}</span>
+
+                            <form method="post" action="{% url 'update_cart_item' item.id %}" style="display:inline-block;">
+                                {% csrf_token %}
+                                <input type="hidden" name="op" value="inc">
+                                <button type="submit" class="qty-btn">+</button>
+                            </form>
+
+                            <form method="post" action="{% url 'remove_cart_item' item.id %}" style="display:inline-block;margin-left:10px;">
+                                {% csrf_token %}
+                                <button type="submit" class="remove-btn">Remove</button>
+                            </form>
+                        </div>
+                    </td>
+                    <td>${{ item.line_total|floatformat:2 }}</td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="4">Your cart is empty.</td>
+                </tr>
+            {% endif %}
+        </table>
+
+        <div class="cart-summary">
+            <div><span>Subtotal</span><span>${{ subtotal }}</span></div>
+            <div><span>Shipping</span><span>${{ shipping }}</span></div>
+            <div><strong>Total</strong><strong>${{ total }}</strong></div>
+            <button class="cart-checkout-btn">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <script src="{% static 'myapp/js/message.js' %}"></script>
+
+</body>
+</html>
