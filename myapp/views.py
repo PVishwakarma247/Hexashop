@@ -16,6 +16,7 @@ def home(request):
     menproduct = Product.objects.filter(category=Product.CATEGORY_MENS)
     womenproduct = Product.objects.filter(category=Product.CATEGORY_WOMENS)
     kidsproduct = Product.objects.filter(category=Product.CATEGORY_KIDS)
+    messages.info(request, 'Use Desktop for better experience')
     return render(request, 'myapp/index.html', {'menproduct': menproduct, 'womenproduct': womenproduct, 'kidsproduct': kidsproduct})
 
 def logout_view(request):
